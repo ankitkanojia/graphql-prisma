@@ -1,11 +1,19 @@
-version: "2"
-services:
+version: "3.7"
+services    :
   backend:
       build: ./backend
+      restart: always
       ports:
       - '4000:4000'
-
-  frontend:
-      build: ./frontend
-      ports:
-      - '3000:3000'
+      env_file:
+      - ./backend/.env
+  postgres-db:
+    image: postgres:10.3
+    restart: always
+    environment:
+      POSTGRES_USER: tqjozinqjlqoeb
+      POSTGRES_PASSWORD: 5e982d015334df7e2396351731a5902716cd39e923d2df2efe6789df00ff21f8
+    volumes:
+      - postgres:/var/lib/postgresql/data
+volumes:
+    postgres: ~
