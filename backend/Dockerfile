@@ -1,17 +1,20 @@
 # pull the official base image  
-FROM node:13.12.0-alpine  
+FROM node:10.11.0 
  
 # set your working directory  
-WORKDIR /app  
- 
+WORKDIR /api  
+
+
+
 # install application dependencies  
-COPY package.json ./  
-COPY package-lock.json ./  
+COPY package*.json ./
+
 RUN npm install --silent  
-RUN npm install react-scripts@3.4.1 -g  
- 
+
+RUN npm install -g @prisma/cli
+
 # add app  
 COPY . ./  
  
 # will start app  
-CMD ["npm", "start"] 
+CMD ["node", "src/index.js"] 
