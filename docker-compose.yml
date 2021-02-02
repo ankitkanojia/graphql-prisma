@@ -1,9 +1,9 @@
 version: "2"
 services:
-  # backend:
-  #     build: ./backend
-  #     ports:
-  #     - '8080:8080'
+  backend:
+      build: ./backend
+      ports:
+      - '4000:4000'
 
   frontend:
       build: ./frontend
