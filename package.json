@@ -1,0 +1,11 @@
+{
+  "name": "graphql-prisma",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "scripts": {
+    "start": "concurrently \"cd frontend && npm start\" \"cd backend && src/index.js\""
+  }
+}
