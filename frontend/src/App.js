@@ -13,7 +13,7 @@ const GET_POKEMON_INFO = gql`
 function App() {
   const { data, loading, error } = useQuery(GET_POKEMON_INFO);
 
-  const status = (error ? "Error in API" : "Loading");
+  const status = (loading ? "Loading" : (error) ? "Error in API" : "Success in API");
 
   return (
     <React.Fragment>
