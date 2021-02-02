@@ -7,6 +7,6 @@
   },
   "scripts": {
     "start": "concurrently \"cd frontend && npm start\" \"cd backend && npm start\"",
-    "build": "concurrently \"cd frontend && npm start\" \"cd backend && npm build\""
+    "build": "concurrently \"cd frontend && npm build\" \"cd backend && npm start\""
   }
 }
