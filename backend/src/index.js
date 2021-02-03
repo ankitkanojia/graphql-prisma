@@ -4,7 +4,7 @@ const { prisma } = require('./db')
 // graphql schema
 const typeDefs = `
   type Query {
-    users: [User]
+    getusers: [User]
   }
 
   type User {
@@ -17,7 +17,7 @@ const typeDefs = `
 // graphql resolver
 const resolvers = {
   Query: {
-    users: async () => {
+    getusers: async () => {
         const allUsers = await prisma.user.findMany();
         return allUsers;
     }
