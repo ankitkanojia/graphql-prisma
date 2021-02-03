@@ -4,7 +4,11 @@ const { prisma } = require('./db')
 // graphql schema
 const typeDefs = `
   type Query {
-    getusers: [User]
+    getUsers: [User]
+  }
+
+  type Mutation {
+    createUser(email: String , name:String): [User]
   }
 
   type User {
@@ -17,10 +21,21 @@ const typeDefs = `
 // graphql resolver
 const resolvers = {
   Query: {
-    getusers: async () => {
+    getUsers: async () => {
         const allUsers = await prisma.user.findMany();
         return allUsers;
     }
+  },
+  Mutation: {
+    createUser: async (root, args, context, info) => {
+      await prisma.user.create({
+        data: {
+          name:  args.name,
+          email: args.email,
+        },
+      })
+      return await prisma.user.findMany()
+   },
   }
 }
 
