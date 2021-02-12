@@ -8,7 +8,8 @@ const typeDefs = `
   }
 
   type Mutation {
-    createUser(email: String , name:String): [User]
+    createUser(email: String, name:String): [User],
+    updateUser(id: ID!, email: String, name:String): [User]
   }
 
   type User {
@@ -22,20 +23,30 @@ const typeDefs = `
 const resolvers = {
   Query: {
     getUsers: async () => {
-        const allUsers = await prisma.user.findMany();
-        return allUsers;
+      const allUsers = await prisma.user.findMany();
+      return allUsers;
     }
   },
   Mutation: {
     createUser: async (root, args, context, info) => {
       await prisma.user.create({
         data: {
-          name:  args.name,
+          name: args.name,
           email: args.email,
-        },
+        }
       })
       return await prisma.user.findMany()
-   },
+    },
+    updateUser: async (root, args, context, info) => {
+      await prisma.user.update({
+        where: { id: Number(args.id) },
+        data: {
+          name: args.name,
+          email: args.email,
+        }
+      })
+      return await prisma.user.findMany()
+    },
   }
 }
 
