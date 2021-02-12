@@ -9,7 +9,8 @@ const typeDefs = `
 
   type Mutation {
     createUser(email: String, name:String): [User],
-    updateUser(id: ID!, email: String, name:String): [User]
+    updateUser(id: ID!, email: String, name:String): [User],
+    deleteUser(id: ID!): [User]
   }
 
   type User {
@@ -47,6 +48,12 @@ const resolvers = {
       })
       return await prisma.user.findMany()
     },
+    deleteUser: async (root, args, context, info) => {
+      await prisma.user.delete({
+        where: { id: Number(args.id) }
+      })
+      return await prisma.user.findMany()
+    }
   }
 }
 
