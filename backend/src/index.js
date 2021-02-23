@@ -1,24 +1,9 @@
 const { ApolloServer } = require('apollo-server');
 const resolvers = require('./resolver')
- 
-// graphql schema
-const typeDefs = `
-  type Query {
-    getUsers: [User]
-  }
-
-  type Mutation {
-    createUser(email: String, name:String): [User],
-    updateUser(id: ID!, email: String, name:String): [User],
-    deleteUser(id: ID!): [User]
-  }
-
-  type User {
-    id: ID     
-    email: String  
-    name: String
- }
-`
+const path = require('path');
+const { readFileSync } = require('fs')
+// we must convert the file Buffer to a UTF-8 string
+const typeDefs = readFileSync(path.join(__dirname, '/schema.graphql')).toString('utf-8') 
 
 // configured apollo server
 const server = new ApolloServer({
